@@ -1,6 +1,7 @@
 import api from "@/services/api";
 import styles from "./styles.module.css";
 import {useRouter} from "next/router";
+import EditarLoja from "@/pages/editar-lojas/[id]";
 
 export default function CardLoja({loja}) {
     const router = useRouter();
@@ -13,11 +14,14 @@ export default function CardLoja({loja}) {
         })
         .catch((err) => alert("Erro ao excluir"));
     }
+    const editarLoja = (id) => {
+        router.push(`/editar-lojas/${id}`);
+    };
     return (
         <div className={styles.container}>
             <p>{loja.nome}</p>
             <span>{loja.endereco}</span>
-            <button type="button" className={styles.btnEditar}>Editar</button>
+            <button type="button" className={styles.btnEditar} onClick={() => editarLoja(loja.id)}>Editar</button>
             <button type="button" className={styles.btnExcluir} onClick={() => excluirLoja(loja.id)}>Excluir</button>
         </div>
     );
